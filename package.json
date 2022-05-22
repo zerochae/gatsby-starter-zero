@@ -5,6 +5,10 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "@types/react-helmet": "^6.1.5",
+    "@types/styled-components": "^5.1.25",
     "gatsby": "^4.14.1",
     "gatsby-plugin-gatsby-cloud": "^4.14.0",
     "gatsby-plugin-image": "^2.14.1",
@@ -12,15 +16,19 @@
     "gatsby-plugin-offline": "^5.14.1",
     "gatsby-plugin-react-helmet": "^5.14.0",
     "gatsby-plugin-sharp": "^4.14.1",
+    "gatsby-plugin-styled-components": "^5.14.0",
+    "gatsby-plugin-typescript": "^4.14.0",
     "gatsby-source-filesystem": "^4.14.0",
     "gatsby-transformer-sharp": "^4.14.0",
     "prop-types": "^15.8.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "typescript": "^4.6.4"
   },
   "keywords": [
     "gatsby"
