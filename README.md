@@ -8,7 +8,11 @@
   <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="contributions welcome" />
 </p>
 
+[English README.md](#)
+
 ## 💻 데모
+
+[English](#) | [한국어](#)
 
 ## ✨ 기능
 
