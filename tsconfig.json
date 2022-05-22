@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
-    "jsx": "preserve",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
@@ -12,15 +19,12 @@
     "paths": {
       "assets/*": ["./assets/*"],
       "components/*": ["./components/*"],
+      "constants/*": ["./constants/*"],
+      "pages/*": ["./pages/*"],
       "styles/*": ["./styles/*"],
-      "templates/*": ["./templates/*"],
-      "typings/*": ["./typings/*"]
-    },
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+      "templates/*": ["./templates/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/header/index.js"],
+  "include": ["src"],
   "exclude": ["node_modules"]
 }
