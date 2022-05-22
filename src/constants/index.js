@@ -1,4 +1,2 @@
-export const THEME = {
-  LIGHT: "light",
-  DARK: "dark",
-}
+export * from "./enum"
+export * from "./lang"
