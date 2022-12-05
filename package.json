@@ -9,19 +9,23 @@
     "gatsby-plugin-image": "^3.2.0",
     "gatsby-plugin-manifest": "^5.2.0",
     "gatsby-plugin-sharp": "^5.2.0",
+    "gatsby-plugin-typescript": "^5.2.0",
     "gatsby-source-filesystem": "^5.2.0",
+    "gatsby-transformer-remark": "^6.2.0",
     "gatsby-transformer-sharp": "^5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "typescript": "^4.9.3"
   },
   "keywords": [
     "gatsby"
   ],
   "license": "0BSD",
   "scripts": {
+    "dev": "gatsby develop",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
