@@ -1,16 +1,22 @@
-import * as React from "react"
+import React, { FC } from "react"
 import { graphql, PageProps } from "gatsby"
+import Layout from "components/layout"
 
-const Post = ({ data }: PageProps<Queries.PostPageQuery>) => {
-  const post = data.markdownRemark
-
+const Post: FC<PageProps<Queries.PostPageQuery>> = ({
+  data: {
+    markdownRemark: {
+      html,
+      frontmatter: { title },
+    },
+  },
+}) => {
   return (
-    <div>
+    <Layout>
       <div>
-        <h1>{post?.frontmatter?.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: `${post?.html}` }} />
+        <h1>{title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: `${html}` }} />
       </div>
-    </div>
+    </Layout>
   )
 }
 
