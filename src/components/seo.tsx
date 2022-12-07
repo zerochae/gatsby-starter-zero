@@ -1,11 +1,4 @@
-/**
- * SEO component that queries for data with
- * Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
-
-import * as React from "react"
+import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 interface Props {
@@ -14,10 +7,18 @@ interface Props {
   children?: React.ReactNode
 }
 
-const Seo: React.FC<Props> = ({ description, title, children }) => {
-  const { site } = useStaticQuery(
+const Seo: React.FC<Props> = ({
+  description: _description,
+  title: _title,
+  children,
+}) => {
+  const {
+    site: {
+      siteMetadata: { author, description, title },
+    },
+  } = useStaticQuery<Queries.SeoQuery>(
     graphql`
-      query {
+      query Seo {
         site {
           siteMetadata {
             title
@@ -29,19 +30,19 @@ const Seo: React.FC<Props> = ({ description, title, children }) => {
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const metaDescription = _description || description
+  const metaTitle = _title || title
 
   return (
     <>
-      <title>{defaultTitle ? `${title} | ${defaultTitle}` : title}</title>
+      <title>{metaTitle}</title>
       <meta name="description" content={metaDescription} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={metaTitle} />
       <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary" />
-      <meta name="twitter:creator" content={site.siteMetadata?.author || ``} />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:creator" content={author} />
+      <meta name="twitter:title" content={metaTitle} />
       <meta name="twitter:description" content={metaDescription} />
       {children}
     </>
