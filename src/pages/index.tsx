@@ -1,5 +1,8 @@
-import * as React from "react"
+import React, { FC } from "react"
 import { Link, graphql, PageProps } from "gatsby"
+import Layout from "components/layout"
+import "styles/index.css"
+import { css } from "@emotion/css"
 
 export const query = graphql`
   query IndexPage {
@@ -10,7 +13,7 @@ export const query = graphql`
           id
           frontmatter {
             title
-            date(formatString: "DD MMMM, YYYY")
+            date(formatString: "YYYY-MM-DD")
           }
           fields {
             slug
@@ -22,21 +25,48 @@ export const query = graphql`
   }
 `
 
-const IndexPage = ({ data }: PageProps<Queries.IndexPageQuery>) => {
-  console.log(data)
-
-  const blog = data.allMarkdownRemark
+const IndexPage: FC<PageProps<Queries.IndexPageQuery>> = ({
+  data: {
+    allMarkdownRemark: { edges },
+  },
+}) => {
   return (
-    <div>
-      <h4>{blog.totalCount} blogs</h4>
-      {blog.edges.map(({ node }) => {
-        return (
-          <div key={node.id}>
-            <Link to={node.fields?.slug || ""}>{node.frontmatter?.title}</Link>
-          </div>
-        )
-      })}
-    </div>
+    <Layout>
+      <div>
+        <ul
+          className={css`
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: var(--size-gap);
+          `}
+        >
+          {edges.map(
+            ({
+              node: {
+                fields: { slug },
+                frontmatter: { title, date },
+                id,
+              },
+            }) => {
+              return (
+                <li
+                  key={id}
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                  `}
+                >
+                  <Link to={slug}>{title}</Link>
+                  <p>{date}</p>
+                </li>
+              )
+            }
+          )}
+        </ul>
+      </div>
+    </Layout>
   )
 }
 
