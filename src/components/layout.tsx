@@ -1,22 +1,21 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/how-to/querying-data/use-static-query/
- */
-
-import * as React from "react"
+import React, { PropsWithChildren } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import Header from "./header"
-import "./layout.css"
+import Header from "components/header"
 
-const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+const Layout: React.FC<PropsWithChildren> = ({ children }) => {
+  const {
+    site: {
+      siteMetadata: { author, menu, title, menuLink },
+    },
+  } = useStaticQuery<Queries.MetaDataQuery>(graphql`
+    query MetaData {
       site {
         siteMetadata {
           title
+          author
+          menu
+          menuLink
         }
       }
     }
@@ -24,7 +23,14 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header
+        siteTitle={title}
+        siteMenu={menu.map((_menu, index) => ({
+          key: _menu,
+          label: _menu,
+          url: menuLink[index],
+        }))}
+      />
       <div
         style={{
           margin: `0 auto`,
@@ -39,9 +45,9 @@ const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
             fontSize: `var(--font-sm)`,
           }}
         >
-          © {new Date().getFullYear()} &middot; Built with
+          © {new Date().getFullYear()}
           {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
+          {author}
         </footer>
       </div>
     </>
