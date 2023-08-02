@@ -14,7 +14,7 @@
     "gatsby-plugin-sharp": "^5.2.0",
     "gatsby-plugin-typescript": "^5.2.0",
     "gatsby-remark-prismjs": "^7.2.0",
-    "gatsby-source-filesystem": "^5.2.0",
+    "gatsby-source-filesystem": "^5.11.0",
     "gatsby-transformer-remark": "^6.2.0",
     "gatsby-transformer-sharp": "^5.2.0",
     "prismjs": "^1.29.0",
@@ -22,8 +22,11 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
     "prettier": "^2.7.1",
-    "typescript": "^4.9.3"
+    "typescript": "^5.1.6"
   },
   "keywords": [
     "gatsby"

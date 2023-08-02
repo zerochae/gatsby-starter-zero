@@ -1,7 +1,6 @@
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
-module.exports = {
+import type { GatsbyConfig } from "gatsby";
+
+const config:GatsbyConfig = {
   graphqlTypegen: true,
   siteMetadata: {
     title: `회색 기록`,
@@ -44,3 +43,5 @@ module.exports = {
     `gatsby-plugin-sharp`,
   ],
 }
+
+export default config

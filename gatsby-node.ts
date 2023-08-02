@@ -1,6 +1,11 @@
-const path = require("path")
+import type { GatsbyNode } from "gatsby"
+import { createFilePath } from "gatsby-source-filesystem"
+import path from "path"
 
-exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
+export const onCreateWebpackConfig: GatsbyNode["onCreateWebpackConfig"] = ({
+  getConfig,
+  actions,
+}) => {
   const output = getConfig().output || {}
 
   actions.setWebpackConfig({
@@ -17,9 +22,11 @@ exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
   })
 }
 
-const { createFilePath } = require(`gatsby-source-filesystem`)
-
-exports.onCreateNode = ({ node, getNode, actions }) => {
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({
+  node,
+  getNode,
+  actions,
+}) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
     const relativeFilePath = createFilePath({
@@ -35,7 +42,18 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 }
 
-exports.createPages = async ({ graphql, actions }) => {
+type Edges = {
+  node: {
+    fields: {
+      slug: string
+    }
+  }
+}
+
+export const createPages: GatsbyNode["createPages"] = async ({
+  graphql,
+  actions,
+}) => {
   const { createPage } = actions
   const result = await graphql(`
     query AllMarkdownRemark {
@@ -50,13 +68,16 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+
+  if (result.errors) {
+    throw result.errors
+  }
+
+  (result.data as any)?.allMarkdownRemark?.edges.forEach(({ node }: Edges) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/post.tsx`),
       context: {
-        // Data passed to context is available
-        // in page queries as GraphQL variables.
         slug: node.fields.slug,
       },
     })
